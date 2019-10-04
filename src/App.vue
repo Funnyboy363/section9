@@ -1,28 +1,45 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div>
+<button @click="selectedComponent = 'appQuote'">Quote</button>
+<button  @click="selectedComponent = 'appAuthor'">Author</button>
+<button  @click="selectedComponent = 'appNew'">New</button>
+<hr>
+<p>{{ selectedComponent }} </p>
+
+<keep-alive>
+<component :is="selectedComponent"></component>
+</keep-alive>
+ <!-- <app-quote>
+<h2 slot="title"> {{ quoteTitle }} </h2>
+<p slot="subtitle"> {{ subtitle }} </p>
+<p slot="content">A Wonderful Quote</p>
+ </app-quote> -->
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Quote from './components/Quote';
+import Author from './components/Author';
+import New from './components/New';
 
 export default {
-  name: 'app',
+    data: function() {
+      return {
+        quoteTitle: 'A beautiful quote',
+        subtitle: 'This is a subtitle',
+        selectedComponent: 'appQuote'
+      }
+    },
+  
   components: {
-    HelloWorld
+    appQuote: Quote,
+    appAuthor: Author,
+    appNew: New
   }
 }
+
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
